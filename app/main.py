@@ -42,6 +42,8 @@ async def lifespan(app: FastAPI):
         _ = app.state.clf.predict_proba(test_embedding)
         print("✅ Modèles chargés avec succès")
 
+        yield
+
     except Exception as e:
         raise RuntimeError(f"ERREUR: {str(e)}\n"
                            "Vérifiez que:\n"
