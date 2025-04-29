@@ -1,4 +1,5 @@
 __pycache__/
 *.pyc
 .env
-models/*.pkl
+models/*
+!models/model_supervise_proba.pkl
