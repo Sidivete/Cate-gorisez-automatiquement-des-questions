@@ -5,7 +5,8 @@ from pydantic import BaseModel
 from pathlib import Path
 from typing import List
 from sentence_transformers import SentenceTransformer
-from fastapi.middleware.cors import CORSMiddleware  # AJOUT IMPORTANT
+from fastapi.middleware.cors import CORSMiddleware
+from contextlib import asynccontextmanager
 
 # Modèles Pydantic
 class TextInput(BaseModel):
@@ -16,7 +17,7 @@ class KeywordOutput(BaseModel):
     keywords: List[str]
     probabilities: List[float]
 
-app = FastAPI()
+app = FastAPI(lifespan=lifespan) 
 
 # AJOUT CORS (Nécessaire pour Streamlit)
 app.add_middleware(
@@ -34,8 +35,8 @@ MODEL_PATH = MODEL_DIR / "model_supervise_proba.pkl"
 print(f"MODEL_PATH = {MODEL_PATH}")
 print(f"model exists: {MODEL_PATH.exists()}")
 
-@app.on_event("startup")
-async def load_models():
+@asynccontextmanager
+async def lifespan(app: FastAPI):
     try:
         # 1. Charger le modèle BERT pour la vectorisation
         app.state.bert = SentenceTransformer('all-MiniLM-L6-v2')
