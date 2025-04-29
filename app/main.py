@@ -30,6 +30,10 @@ app.add_middleware(
 MODEL_DIR = Path(__file__).parent / "models"
 MODEL_PATH = MODEL_DIR / "model_supervise_proba.pkl"
 
+# Log avant de charger le modèle
+print(f"MODEL_PATH = {MODEL_PATH}")
+print(f"model exists: {MODEL_PATH.exists()}")
+
 @app.on_event("startup")
 async def load_models():
     try:
