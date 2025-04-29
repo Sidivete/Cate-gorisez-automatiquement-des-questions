@@ -2,38 +2,28 @@ name: Python application
 
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    # Étape pour récupérer ton code depuis GitHub
     - name: Checkout code
       uses: actions/checkout@v3
 
-    # Étape pour configurer Python
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
         python-version: '3.10'
 
-    # Étape pour installer les dépendances
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    # Étape pour définir PYTHONPATH (pour que le module 'app' soit trouvé)
-    - name: Set PYTHONPATH
-      run: echo "PYTHONPATH=$(pwd)/app" >> $GITHUB_ENV
-
-    # Étape pour exécuter les tests
     - name: Run tests
       run: |
-        pytest
+        PYTHONPATH=./app pytest
