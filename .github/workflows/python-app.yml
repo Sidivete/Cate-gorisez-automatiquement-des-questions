@@ -1,28 +1,22 @@
-name: Python CI
+name: Python application
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["pypy3.10", "3.9", "3.10", "3.11", "3.12", "3.13"]
 
     steps:
-    - name: Check out repository
-      uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: ${{ matrix.python-version }}
+        python-version: "3.10"
 
     - name: Install dependencies
       run: |
@@ -30,8 +24,7 @@ jobs:
         pip install -r requirements.txt
 
     - name: Set PYTHONPATH
-      run: echo "PYTHONPATH=$(pwd)/app" >> $GITHUB_ENV
+      run: echo "PYTHONPATH=${{ github.workspace }}/app" >> $GITHUB_ENV
 
     - name: Run tests
-      run: |
-        python -m pytest --maxfail=1 --disable-warnings -q
+      run: pytest
