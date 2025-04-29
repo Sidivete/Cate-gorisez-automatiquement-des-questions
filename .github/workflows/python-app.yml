@@ -27,4 +27,4 @@ jobs:
       run: echo "PYTHONPATH=${{ github.workspace }}/app" >> $GITHUB_ENV
 
     - name: Run tests
-      run: pytest
+      run: pytest -s
