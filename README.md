@@ -15,9 +15,7 @@ L'API est accessible à l'adresse suivante :
 [https://predict-tags-f1xo.onrender.com/predict](https://predict-tags-f1xo.onrender.com/predict)
 
 ## Installation
-
 ### Prérequis
-Avant d'exécuter ce projet, tu dois installer les dépendances suivantes :
 Python 3.x
 FastAPI
 Uvicorn
@@ -25,4 +23,4 @@ SentenceTransformers
 joblib
 
 ## Déploiement
-L'API est hébergée sur Render, une plateforme de déploiement cloud. Si tu souhaites déployer cette API toi-même, tu peux consulter le fichier render.yaml qui configure le déploiement sur Render.
+L'API est hébergée sur Render, une plateforme de déploiement cloud.
