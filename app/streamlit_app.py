@@ -3,7 +3,7 @@ import requests
 from datetime import datetime
 
 # Configuration
-API_URL = "http://localhost:8000/predict"  # À remplacer par l'URL de déploiement plus tard
+API_URL = "https://predict-tags-f1xo.onrender.com/predict"  
 
 # --- Interface Utilisateur ---
 st.set_page_config(page_title="API Keyword Predictor", layout="wide")
